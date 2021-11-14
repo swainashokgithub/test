@@ -25,7 +25,7 @@ function App() {
           <Route path="/register" component={Register}></Route>
           <Route path="/userlist" component={Userlist}></Route>
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </>
   );
