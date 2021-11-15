@@ -10,11 +10,11 @@ import {
 import Home from './Component/Home/Home';
 import Header from './Component/Navbar/Header';
 import Footer from './Component/Footer/Footer';
-
+import About from "./Component/About/About";
 
 
 function App() {
-  
+
 
   return (
     <>
@@ -24,6 +24,7 @@ function App() {
           <Route exact path="/" component={Home}></Route>
           <Route path="/register" component={Register}></Route>
           <Route path="/userlist" component={Userlist}></Route>
+          <Route path="/about" component={About}></Route>
         </Switch>
         <Footer />
       </Router>

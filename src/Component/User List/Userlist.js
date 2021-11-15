@@ -18,13 +18,14 @@ const Userlist = () => {
             return res.json();
         }).then(data => {
             console.log(data)
-            setUserList1(data);
+            setUserList1(data.sort((a, b) => b.id - a.id));
         })
     }, [])
 
     const columns = [{
         dataField: 'id',
-        text: 'Product ID'
+        text: 'ID',
+        sort: true
     },
     {
         dataField: 'username',
@@ -41,6 +42,10 @@ const Userlist = () => {
     {
         dataField: 'gender',
         text: 'gender'
+    },
+    {
+        dataField: 'country',
+        text: 'country'
     },
     {
         dataField: 'college',

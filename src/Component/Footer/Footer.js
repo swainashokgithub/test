@@ -7,24 +7,24 @@ const Footer = () => {
   return (
     <>
 
-      <footer className="footer-distributed w-100% fixed-button" style={{ marginTop: "500px" }} >
+      <footer className="footer-distributed w-100% fixed-button" style={{ marginTop: "300px" }} >
 
         <div className="footer-left">
 
           <h3>Company<span>logo</span></h3>
 
           <p className="footer-links">
-            <a href="#" className="link-1">Home</a>
+            <a href="/" className="link-1">Home</a>
 
-            <a href="#">Blog</a>
+            <a href="/">Blog</a>
 
-            <a href="#">Pricing</a>
+            <a href="/">Pricing</a>
 
-            <a href="#">About</a>
+            <a href="/about">About</a>
 
-            <a href="#">Faq</a>
+            <a href="/">Faq</a>
 
-            <a href="#">Contact</a>
+            <a href="/">Contact</a>
           </p>
 
           <p className="footer-company-name">Company Name © 2015</p>
@@ -59,9 +59,9 @@ const Footer = () => {
           <div className="footer-icons">
 
             <a href="https://www.facebook.com"><FaFacebook className="fafbook" /></a>
-            <a href="#"><FaTwitter className="fatwitter" /></a>
-            <a href="#"><FaLinkedin className="falinkedin" /></a>
-            <a href="#"><FaGithubSquare className="fagithub" /></a>
+            <a href="http://twitter.com/"><FaTwitter className="fatwitter" /></a>
+            <a href="https://www.linkedin.com/in/williamhgates/"><FaLinkedin className="falinkedin" /></a>
+            <a href="https://pages.github.com/"><FaGithubSquare className="fagithub" /></a>
 
           </div>
 

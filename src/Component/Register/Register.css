@@ -2,6 +2,13 @@
     margin-top: 200px;
 }
 
-.textfont{
+.textfont1{
     flex-wrap: wrap;
+}
+.textfont2{
+    flex-wrap: wrap;
+}
+
+.gender-text{
+    margin-left: 125px;
 }
