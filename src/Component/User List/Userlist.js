@@ -21,7 +21,7 @@ const Userlist = () => {
             setUserList1(data.sort((a, b) => b.id - a.id));
         })
     }, [])
-
+    let hobbies =  userList1.hobbies&&userList1.hobbies || {};
     const columns = [{
         dataField: 'id',
         text: 'ID',
@@ -51,6 +51,15 @@ const Userlist = () => {
         dataField: 'college',
         text: 'College'
     },
+    {
+        dataField: 'hobbies',
+    text: 'Hobbies',
+    sort: true,
+    formatter: (cellContent, row, rowIndex) => (
+      Object.values(row.hobbies)[rowIndex]
+    )
+        
+    }
     ];
     //Navigating from table data to register page to upadate the data
     const rowEvents = {

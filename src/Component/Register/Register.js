@@ -127,10 +127,11 @@ const Register = (props) => {
             setError({ ...error, college: true })
             return;
         }
-        if (!userRecords.hobbies) {
+        if (!userRecords.hobbies.reading) {
             setError({ ...error, hobbies: true })
             return;
         }
+    
 
         fetch("https://618eb8c250e24d0017ce1403.mockapi.io/student", {
             method: "POST",
@@ -214,13 +215,13 @@ const Register = (props) => {
         <>
 
             <Container className=" mt-5 mb-4">
-                <button className="btn btn-lg" onClick={onOpenModal}>{editMode ? "Update User" : "Add User"}</button>
-                {editMode ? <Button type="submit" onClick={onDelete} variant="btn-primary">Delete</Button> : null}
+                <button className="btn btn-secondary col-sm-4 " onClick={onOpenModal}>{editMode ? "Update User" : "Add User"}</button>
+                {editMode ? <Button type="submit" onClick={onDelete} variant="btn btn-secondary col-sm-4 ">Delete</Button> : null}
                 <Modal show={open} onHide={onCloseModal}>
                     <Form>
                         <Form.Group className="mb-3 col-lg-6 col-md-6 col-sm-6 ms-auto me-auto ">
                             <Form.Label>User Name:</Form.Label>
-                            <Form.Control id="txtName" defaultValue={userRecords.username} type="text" placeholder="Enter Your Name"
+                            <Form.Control id="txtName" value={userRecords.username} type="text" placeholder="Enter Your Name"
                                 onChange={(e) => {
                                     setUserRecords({ ...userRecords, username: e.target.value })
                                     setError({ ...error, username: false })
@@ -231,7 +232,7 @@ const Register = (props) => {
 
                         <Form.Group className="mb-3 col-sm-6 ms-auto me-auto ">
                             <Form.Label>Birth Date:</Form.Label>
-                            <Form.Control id="txtDob" defaultValue={userRecords.birthdate} type="date"
+                            <Form.Control id="txtDob" value={userRecords.birthdate} type="date"
                                 onChange={(e) => {
                                     setUserRecords({ ...userRecords, birthdate: e.target.value })
                                     setError({ ...error, birthdate: false })
@@ -241,7 +242,7 @@ const Register = (props) => {
 
                         <Form.Group className="mb-3 col-sm-6 ms-auto me-auto ">
                             <Form.Label>Address:</Form.Label>
-                            <Form.Control id="txtAddress" defaultValue={userRecords.address} as="textarea" rows="2" placeholder="Enter Your Address"
+                            <Form.Control id="txtAddress" value={userRecords.address} as="textarea" rows="2" placeholder="Enter Your Address"
                                 onChange={(e) => {
                                     setUserRecords({ ...userRecords, address: e.target.value })
                                     setError({ ...error, address: false })
@@ -281,11 +282,12 @@ const Register = (props) => {
                         <Form.Group className="mb-3 col-sm-6 ms-auto me-auto textfont1">
                             <Form.Label>Country:</Form.Label>
                             <Form.Control as="select" type="text"
-                                onChange={(e) => { setUserRecords({ ...userRecords, country: e.target.value }); setSelectedCountry(e.target.value) }} >
+                                onChange={(e) => { setUserRecords({ ...userRecords, country: e.target.value }); setSelectedCountry(e.target.value)
+                                setError({ ...error, country: false }) }} >
                                 <option value="">{"Choose Your Country Name"}</option>
                                 {apiCountryRecords.map((x, index) => {
                                     return (
-                                        <option key={index} value={x.alpha_two_code} title={x.country}>{x.country}</option>
+                                        <option key={index} value={x.country} title={x.alpha_two_code}>{x.country}</option>
                                     )
                                 })}
 
@@ -297,11 +299,12 @@ const Register = (props) => {
                         <Form.Group className="mb-3 col-sm-6 ms-auto me-auto textfont1">
                             <Form.Label>College:</Form.Label>
                             <Form.Control as="select" type="text"
-                                onChange={(e) => { setUserRecords({ ...userRecords, college: e.target.value }) }} >
+                                onChange={(e) => { setUserRecords({ ...userRecords, college: e.target.value })
+                                setError({ ...error, college: false }) }} >
                                 <option value="">{"Choose Your College Name"}</option>
-                                {apiCountryRecords.filter(x => x.alpha_two_code === selectedCountry).map((x, index) => {
+                                {apiCountryRecords.filter(x => x.country === selectedCountry).map((x, index) => {
                                     return (
-                                        <option key={index} value={x.alpha_two_code} title={x.name}>{x.name}</option>
+                                        <option key={index} value={x.name} title={x.alpha_two_code}>{x.name} </option>
                                     )
                                 })}
 
@@ -312,18 +315,35 @@ const Register = (props) => {
 
                         <Form.Group className="d-flex mb-3 col-sm-6 ms-auto me-auto textfont2" >
                             <Form.Label>Hobbies:</Form.Label>
+
                             <Form.Label className="mx-2">Reading:</Form.Label>
-                            <Form.Check onChange={(e) => { setUserRecords({ ...userRecords, hobbies: { ...userRecords.hobbies, reading: e.target.value } }) }} type="checkbox" name="Reading" value="Reading" />
+                            <Form.Check type="checkbox" name="Reading"  value={userRecords.hobbies.reading}
+                                 onChange={(e) => { setUserRecords({ ...userRecords, hobbies: { ...userRecords.hobbies,reading:"Reading" } })
+                                 setError({ ...error, hobbies: false })}}  />
+                            
                             <Form.Label className="mx-2">Gaming:</Form.Label>
-                            <Form.Check onChange={(e) => { setUserRecords({ ...userRecords, hobbies: { ...userRecords.hobbies, gaming: e.target.value } }) }} type="checkbox" name="Gaming" value="Gaming" />
+                            <Form.Check type="checkbox" name="Gaming"  value={userRecords.hobbies.gaming}
+                            onChange={(e) => { setUserRecords({ ...userRecords, hobbies: { ...userRecords.hobbies, gaming: "Gaming" } })
+                            setError({ ...error, hobbies: false }) }} />
+                            
                             <Form.Label className="mx-2">Traveling:</Form.Label>
-                            <Form.Check onChange={(e) => { setUserRecords({ ...userRecords, hobbies: { ...userRecords.hobbies, traveling: e.target.value } }) }} type="checkbox" name="Traveling" value="Traveling" />
+                            <Form.Check type="checkbox" name="Traveling"  value={userRecords.hobbies.traveling}
+                             onChange={(e) => { setUserRecords({ ...userRecords, hobbies: { ...userRecords.hobbies, traveling: "Traveling" } })
+                             setError({ ...error, hobbies: false }) }} />
+                            
                             <Form.Label className="mx-2">Drawing:</Form.Label>
-                            <Form.Check onChange={(e) => { setUserRecords({ ...userRecords, hobbies: { ...userRecords.hobbies, drawing: e.target.value } }) }} type="checkbox" name="Drawing" value="Drawing" />
+                            <Form.Check  type="checkbox" name="Drawing"  value={userRecords.hobbies.drawing}
+                             onChange={(e) => { setUserRecords({ ...userRecords, hobbies: { ...userRecords.hobbies, drawing: "Drawing" } })
+                             setError({ ...error, hobbies: false }) }}  />
+                           
                             <Form.Label className="mx-2">Other:</Form.Label>
-                            <Form.Check onChange={(e) => { setUserRecords({ ...userRecords, hobbies: { ...userRecords.hobbies, other: e.target.value } }) }} type="checkbox" name="Other" value="Other" />
+                            <Form.Check  type="checkbox" name="Other"  value={userRecords.hobbies.other}
+                             onChange={(e) => { setUserRecords({ ...userRecords, hobbies: { ...userRecords.hobbies, other: "other" } })
+                             setError({ ...error, hobbies: false }) }} />
+                           
                         </Form.Group>
-                        {error.hobbies && <p className="text-danger">This field is required*</p>}
+                        
+                        {error.hobbies && <p className="text-danger hobbies-text">This field is required*</p>}
 
                         <div className="text-center">
                             <Button type="submit" onClick={(e) => { onRegistrationComplete(e) }} className="col-lg-4 col-md-4 col-sm-4 btn ms-auto me-auto btn-primary">
